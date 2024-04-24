@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>FORM PEMUNGUTAN PNBP HARIAN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ffcc00, #ff6699);
+      margin: 0;
+      padding: 0;
+    }
+
+    #header {
+      background-color: #007bff;
+      padding: 10px;
+    }
+
+    #form-container {
+      width: 80%;
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #28a745;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      color: #fff; /* Warna teks pada form-container */
+      font-weight: bold; /* Huruf tebal */
+    }
+
+    h2 {
+      text-align: center;
+      color: #fff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .dokumen-karantina {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .dokumen-karantina-column {
+      flex: 1;
+    }
+
+  </style>
+
+  <script>
+    function handleCheckbox() {
+      var checkboxes = document.querySelectorAll('input[name="dokumen_karantina"]:checked');
+      var selectedValues = [];
+      checkboxes.forEach(function(checkbox) {
+        selectedValues.push(checkbox.value);
+      });
+      document.getElementById('dokumen_karantina_hidden').value = selectedValues.join(", ");
+    }
+
+    function resetForm() {
+      document.getElementById("wilayah_kerja").setCustomValidity('');
+      setTimeout(function() {
+        document.getElementById("myForm").reset();
+      }, 100);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="header">
+    <h2>FORM PEMUNGUTAN PNBP HARIAN</h2>
+  </div>
+  <div id="form-container">
+    <form id="myForm" action="https://script.google.com/macros/s/AKfycbwdjAeRhSqL83u8-l2KdfuODVOi3Tk6y7wLSicEo03yoRjqeTxgHZrmICLUqPog-Sh4OQ/exec" method="post">
+
+      <label for="wilayah_kerja">Wilayah Kerja:</label>
+      <select id="wilayah_kerja" name="wilayah_kerja" required>
+        <option value="">Pilih Wilayah Kerja</option>
+        <option value="Pelabuhan Agats">Pelabuhan Agats</option>
+        <option value="Pelabuhan Bade">Pelabuhan Bade</option>
+        <option value="Pelabuhan Tanah Merah">Pelabuhan Tanah Merah</option>
+        <option value="Pelabuhan Wanam">Pelabuhan Wanam</option>
+      </select>
+
+      <label for="nama_perusahaan_pelayaran">Nama Perusahaan Pelayaran:</label>
+      <input type="text" id="nama_perusahaan_pelayaran" name="nama_perusahaan_pelayaran" required>
+
+      <label for="nama_kapal">Nama Kapal:</label>
+      <input type="text" id="nama_kapal" name="nama_kapal" required>
+
+      <label for="ukuran_kapal">Ukuran Kapal:</label>
+      <input type="number" id="ukuran_kapal" name="ukuran_kapal" required>
+
+      <label for="dokumen_karantina">Dokumen Karantina:</label>
+      <div class="dokumen-karantina">
+        <div class="dokumen-karantina-column">
+          <div class="checkbox-container">
+            <input type="checkbox" id="phqc" name="dokumen_karantina" value="PHQC" onchange="handleCheckbox()">
+            <label for="phqc">PHQC</label>
+          </div>
+          <div class="checkbox-container">
+            <input type="checkbox" id="health_book" name="dokumen_karantina" value="Health Book" onchange="handleCheckbox()">
+            <label for="health_book">Health Book</label>
+          </div>
+        </div>
+        <div class="dokumen-karantina-column">
+          <div class="checkbox-container">
+            <input type="checkbox" id="sscec" name="dokumen_karantina" value="SSCEC" onchange="handleCheckbox()">
+            <label for="sscec">SSCEC</label>
+          </div>
+          <div class="checkbox-container">
+            <input type="checkbox" id="sscc" name="dokumen_karantina" value="SSCC" onchange="handleCheckbox()">
+            <label for="sscc">SSCC</label>
+          </div>
+        </div>
+        <div class="dokumen-karantina-column">
+          <div class="checkbox-container">
+            <input type="checkbox" id="p3k" name="dokumen_karantina" value="P3K" onchange="handleCheckbox()">
+            <label for="p3k">P3K</label>
+          </div>
+          <div class="checkbox-container">
+            <input type="checkbox" id="cop" name="dokumen_karantina" value="COP" onchange="handleCheckbox()">
+            <label for="cop">COP</label>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" id="dokumen_karantina_hidden" name="dokumen_karantina_hidden">
+
+      <label for="jumlah_pembayaran">Jumlah Pembayaran:</label>
+      <input type="text" id="jumlah_pembayaran" name="jumlah_pembayaran" required>
+
+      <label for="status_pembayaran">Status Pembayaran:</label>
+      <select id="status_pembayaran" name="status_pembayaran" required>
+        <option value="">Pilih Status Pembayaran</option>
+        <option value="Sudah bayar">Sudah bayar</option>
+        <option value="Belum Bayar">Belum bayar</option>
+      </select>
+
+      <label for="keterangan">Keterangan:</label>
+      <input type="text" id="keterangan" name="keterangan">
+
+      <input type="submit" value="Simpan Data" onclick="resetForm()">
+    </form>
+  </div>
+</body>
+
+</html>
